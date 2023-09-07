@@ -1,0 +1,56 @@
+﻿@model CrudAspAdoNetSp.Models.Employee
+
+@{
+    ViewData["Title"] = "Crear Empleado";
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+
+<h3>@ViewData["Title"]?.ToString()</h3>
+<hr />
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">
+        <b>Error: </b>@errorMessage
+        <button type="button" class="bton-close float-end" data-bs-dismiss="alert" aria-label="close"></button>
+    </div>
+}
+<form method="post" action="Create" class="mt-3" autocomplete="off"> 
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" asp-for="FirstName" style="width: 500px;" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Apellido</label>
+        <input type="text" class="form-control" asp-for="LastName" style="width: 500px;" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Fecha de nacimiento</label>
+        <input type="date" class="form-control" asp-for="DateOfBirth" style="width: 500px;" />
+        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Correo</label>
+        <input type="email" class="form-control" asp-for="Email" style="width: 500px;" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Salario</label>
+        <div class="input-group" style="width: 500px;">
+            <span class="input-group-text">$</span>
+            <input type="text" class="form-control" asp-for="Salary"  />
+        </div>
+        <span asp-validation-for="Salary" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <div class="col-lg-12 d-grid">
+            <button type="submit" class="btn btn-success" style="width: 150px;">Registrar</button>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
